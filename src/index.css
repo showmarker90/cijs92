@@ -4,3 +4,10 @@
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
 }
+
+button{
+    width: 200px;
+    padding: 40px 0px;
+    text-align:  center;
+    font-size: 20px;
+}

@@ -1,21 +1,18 @@
-import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import MainContent from "./components/MainContent";
-import Sidebar from "./components/Sidebar";
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
+  const [tinder, setTinder] = useState([]);
+  const onAddTinder = () => {
+    const name = prompt("Enter name you want to date?");
+
+    setTinder([...tinder, name]);
+  };
   return (
     <div>
-      <Header />
-      <div className="body">
-        <Sidebar />
-        <MainContent />
-        <Sidebar />
-      </div>
-      <Footer />
+      <h1>{JSON.stringify(tinder)}</h1>
+      <button onClick={onAddTinder}>Add tinder</button>
     </div>
   );
-}
+};
 
 export default App;

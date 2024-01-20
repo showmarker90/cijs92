@@ -1,12 +1,15 @@
-LESSON2 : INTRODUCE REACT
+LESSON5 : STATE VÀ EVENT
 
-- install node
+1 : EVENT
 
-- npm create vite
+2 : STATE
 
-* component?
+- dùng một hoặc nhiều state để control 1 component
+- useState
+- state thay đổi -> component -> re-render
+- state độc lập vs component
 
-  - khai niem quan trong trong react
-  - react xoay quanh component
+3 : Render
 
-props
+- initial render (render lần đầu tiên)
+- re-render (render lại)
