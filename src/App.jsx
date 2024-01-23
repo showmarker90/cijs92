@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 
 const App = () => {
-  const [tinder, setTinder] = useState([]);
-  const onAddTinder = () => {
-    const name = prompt("Enter name you want to date?");
+  const [person, setPerson] = useState({
+    name: "mindX",
+    age: 23,
+  });
 
-    setTinder([...tinder, name]);
+  [];
+
+  const onChangeName = () => {
+    const name = prompt("Enter name ?");
+    setPerson({ ...person, name });
   };
   return (
     <div>
-      <h1>{JSON.stringify(tinder)}</h1>
-      <button onClick={onAddTinder}>Add tinder</button>
+      <button>Add person</button>
     </div>
   );
 };
 
 export default App;
+
+//button -> 2 prompt "name","age"
+//k nhập tên -> tên
+// k nhập tuổi -> cả tên cả tuổi
+//{name,age,createdAt}
+//[]
