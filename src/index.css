@@ -5,9 +5,13 @@
     font-family: 'Nunito', sans-serif;
 }
 
-button{
-    width: 200px;
-    padding: 40px 0px;
-    text-align:  center;
-    font-size: 20px;
+#form{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+#form *{
+    display: block;
+    margin: 10px 0px;
+    text-align: center;
 }
