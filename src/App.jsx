@@ -1,67 +1,64 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import { FaPlus } from "react-icons/fa";
+import { Button, Input } from "antd";
+import "./App.css";
 
-const App = () => {
-  const [user, setUser] = useState({
-    fullname: "",
-    password: "",
-    email: "",
-    confirmPassowrd: "",
+const deplay = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(1);
+    }, 200);
   });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (
-      !user.email ||
-      !user.confirmPassowrd ||
-      !user.fullname ||
-      !user.password
-    ) {
-      alert("please check!!");
-      return;
-    }
+const App = () => {
+  const [value, setValue] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    if (user.password !== user.confirmPassowrd) {
-      alert("please check again password");
-      return;
-    }
+  const handleAddTodo = async () => {
+    setIsLoading(true);
+    await deplay();
+    setTodos([...todos, value]);
+    toast.success("add todo success!!");
+    setValue("");
 
-    alert(JSON.stringify(user));
+    setIsLoading(false);
   };
 
-  const onChangeValue = (key) => (e) =>
-    setUser({ ...user, [key]: e.target.value });
-
   return (
-    <form id="form" onSubmit={onSubmit}>
-      <h1>Login form</h1>
-      <label>Fullname</label>
-      <input
-        id="input"
-        value={user.fullname}
-        onChange={onChangeValue("fullname")}
-      />
-      <label>Password</label>
-      <input
-        id="input"
-        value={user.password}
-        onChange={onChangeValue("password")}
-      />
-      <label>Email</label>
-      <input
-        id="input"
-        type="email"
-        value={user.email}
-        onChange={onChangeValue("email")}
-      />
-      <label>Confirm password</label>
-      <input
-        id="input"
-        value={user.confirmPassowrd}
-        onChange={onChangeValue("confirmPassowrd")}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div>
+      <h1 id="title">TODOLISTS</h1>
+      <div
+        style={{
+          display: "flex",
+          gap: 10,
+        }}
+      >
+        <Input
+          size="large"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <Button
+          size="large"
+          onClick={handleAddTodo}
+          type="primary"
+          disabled={!value}
+          loading={isLoading}
+        >
+          <FaPlus />
+        </Button>
+      </div>
+
+      <div>
+        {todos.map((todo) => (
+          <h3>{todo}</h3>
+        ))}
+      </div>
+      <ToastContainer />
+    </div>
   );
 };
 

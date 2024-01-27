@@ -1,20 +1,10 @@
-.header,.footer{
-    background-color: green;
-    height: 80px;
+body{
+    background: #f8f8ff;
+    padding: 30px 50px;
 }
 
-.body{
-    display: flex;
-    
-}
-
-.main-content{
-    flex: 1;
-    background-color: red;
-    height: 700px;
-}
-
-.sidebar{
-    background-color: blue;
-    width: 200px;
+#title{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
