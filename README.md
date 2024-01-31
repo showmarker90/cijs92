@@ -1,27 +1,16 @@
-LESSON7 : LIST & CONDITIONAL RENDERING
+LESSON 8 : Side Effect vs useEffect
 
-- List
-- Method array
+8.1 : Side effect la gi?
 
-  - map
-  - filter
+- tác vụ nằm ngoài khả năng của component
 
-map -> tao ra mang moi
+  8.2 : useEffect
 
-const arr = [1, 2, 3, 4, 5];
+  syntax :
 
-const arr1 = arr.map((value) => value \* 2);
+  - useEffect(cb,[array dependencies])
 
-console.log(arr1);
+  - useEffect(() => {
+    },[])
 
-filter -> tao ra mang moi
-
-const arr2 = arr.filter((value) => value > 2);
-
-console.log(arr2);
-
-- react-toastify
-- react-icons
-- antd
-
-* Conditional rendering -> điều kiện rendering
+  KL : - cb duoc goi dong thoi voi qua trinh render component lan dau tien - cb dc goi lai neu component re-render (KHONG CO ARRAY DEPENDENCIES) - nếu có tham số thứ 2, cb đc gọi khi render lần đầu, và array dependencies thay đổi
