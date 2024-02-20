@@ -1,45 +1,33 @@
-import React from "react";
-import data from "./data.json";
-import { FaStar } from "react-icons/fa6";
+import React, { createContext, useState } from "react";
+import Header from "./component/Header";
+import Body from "./component/Body";
 import "./App.css";
-console.log(data);
+
+export const ThemeContext = createContext();
+
+const themeFromLocal = localStorage.getItem("theme");
 
 const App = () => {
+  const [theme, setTheme] = useState(themeFromLocal ? themeFromLocal : "light");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
   return (
-    <div id="product-wrapper">
-      {data.map((item) => (
-        <div className="product-item">
-          <div className="product-img">
-            <img src={item.image} />
-          </div>
-          <div className="product-info">
-            <h3 className="title">{item.title}</h3>
-            <div className="start-wrapper">
-              {Array.from(Array(Math.round(item.rating.rate)).keys()).map(
-                () => (
-                  <FaStar color="gold" />
-                )
-              )}
-              {/* {console.log(Math.round(item.rating.rate))} */}
-            </div>
-            <p className="price">$100</p>
-            <p className="category">Men clothing</p>
-            <p className="desc">Desc product</p>
-          </div>
-        </div>
-      ))}
-    </div>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+      }}
+    >
+      <div className={`app ${theme}`}>
+        <Header />
+        <Body />
+      </div>
+    </ThemeContext.Provider>
   );
 };
 
 export default App;
-
-function createArrayFromRating(rate) {
-  const result = [];
-
-  for (let i = 0; i <= Math.round(rate); i++) {
-    result.push(i);
-  }
-
-  return result;
-}
