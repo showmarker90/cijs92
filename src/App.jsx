@@ -1,32 +1,31 @@
-import React, { createContext, useState } from "react";
-import Header from "./component/Header";
-import Body from "./component/Body";
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Phone from "./pages/Phone";
+import Laptop from "./pages/Laptop";
+import Home from "./pages/Home";
+import Tablet from "./pages/Tablet";
+import NotFound from "./pages/NotFound";
 import "./App.css";
-
-export const ThemeContext = createContext();
-
-const themeFromLocal = localStorage.getItem("theme");
+import Header from "./components/Header";
+import Product from "./pages/Product";
+import ProductDetail from "./pages/ProductDetail";
+import { Login } from "./pages/Login";
 
 const App = () => {
-  const [theme, setTheme] = useState(themeFromLocal ? themeFromLocal : "light");
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        toggleTheme,
-      }}
-    >
-      <div className={`app ${theme}`}>
-        <Header />
-        <Body />
-      </div>
-    </ThemeContext.Provider>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/laptop" element={<Laptop />} />
+        <Route path="/phone" element={<Phone />} />
+        <Route path="/tablet" element={<Tablet />} />
+        <Route path="/products" element={<Product />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
