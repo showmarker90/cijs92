@@ -1,32 +1,54 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Phone from "./pages/Phone";
-import Laptop from "./pages/Laptop";
-import Home from "./pages/Home";
-import Tablet from "./pages/Tablet";
-import NotFound from "./pages/NotFound";
-import "./App.css";
-import Header from "./components/Header";
-import Product from "./pages/Product";
-import ProductDetail from "./pages/ProductDetail";
-import { Login } from "./pages/Login";
+import { Button } from "antd";
+import React, { useState } from "react";
+import axios from "axios";
+import { SyncLoader } from "react-spinners";
+
+//promise -> []
+//then, catch,finnaly
+//async await
+
+const instanceAxios = axios.create({
+  baseURL: "https://fakestoreapi.com/products/",
+});
+
+const slow3G = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 2000);
+  });
 
 const App = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchProducts = async () => {
+    setIsLoading(true);
+    const { data } = await instanceAxios.get();
+    await slow3G();
+    setIsLoading(false);
+    setProducts(data);
+  };
+
+  console.log(isLoading); //[]....
+
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/laptop" element={<Laptop />} />
-        <Route path="/phone" element={<Phone />} />
-        <Route path="/tablet" element={<Tablet />} />
-        <Route path="/products" element={<Product />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <div id="body">
+      <Button onClick={fetchProducts} type="primary" size="large">
+        Fetch data
+      </Button>
+      {isLoading && (
+        <div className="loading">
+          <SyncLoader size={20} />
+        </div>
+      )}
+      {products.map(({ title }) => (
+        <h1 key={title}>{title}</h1>
+      ))}
+    </div>
   );
 };
 
 export default App;
+
+//baseURL
