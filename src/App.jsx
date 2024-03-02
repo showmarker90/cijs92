@@ -1,29 +1,23 @@
-import { Button } from "antd";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { Button, Input } from "antd";
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Body from "./components/Body";
+import useInput from "./hooks/useInput";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
-  const clickCountState = () => setCount(count + 1);
-
-  const logMsg = useCallback((msg = "Nothing") => {
-    console.log(msg);
-  }, []);
-
-  useEffect(() => {
-    console.log("effect running!");
-  }, [logMsg]);
-
+  const { value, onChange, reset } = useInput();
   return (
     <div>
-      <h1>Count state :{count}</h1>
-      <Button onClick={clickCountState}>Click me</Button>
+      <h1>{value}</h1>
+      <Input
+        value={value}
+        onChange={onChange}
+        suffix={
+          <Button type="primary" danger size="small" onClick={reset}>
+            Reset
+          </Button>
+        }
+      />
     </div>
   );
 };

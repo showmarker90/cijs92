@@ -1,12 +1,15 @@
-LESSON2 : Others hook
+LESSON 13 : CUSTOM HOOKS
 
-useState -> quản lý state của 1 component
-useEffect -> xử lí side effect
-useContext -> xử lí context
+useState,useEffect,useMemo,useCallback,useRef,useContext,......
 
-- useRef
-  - truy cập vào 1 phần tử trong DOM
-  - lưu trữ giá trị giữa mỗi lần re-render
-- memo : tránh component bị re-render nhiều lần
-- useMemo : ghi nhớ 1 giá trị
-- useCallback : gia nho 1 function
+1 :quy tắc dùng hook
+2 :custom hook
+
+dùng custom hook khi mã code nó lặp lại,(giống, tương tự) ở các component
+
+custom hook
+
+increase
+decrease
+multiply (2) => \*2
+divide (2) => /2
